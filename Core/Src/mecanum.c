@@ -12,10 +12,10 @@ typedef struct {
 } MotorCfg;
 
 static MotorCfg motors[4] = {
-    /* M_FL */ { GPIOD, GPIO_PIN_2,  GPIOD, GPIO_PIN_3,  TIM_CHANNEL_1 },
-    /* M_FR */ { GPIOD, GPIO_PIN_4,  GPIOD, GPIO_PIN_7,  TIM_CHANNEL_2 },
-    /* M_BL */ { GPIOD, GPIO_PIN_8,  GPIOD, GPIO_PIN_9,  TIM_CHANNEL_3 },
-    /* M_BR */ { GPIOD, GPIO_PIN_10, GPIOD, GPIO_PIN_11, TIM_CHANNEL_4 },
+    /* M_FL (M1) */ { GPIOB, GPIO_PIN_13, GPIOB, GPIO_PIN_12, TIM_CHANNEL_1 },
+    /* M_FR (M2) */ { GPIOE, GPIO_PIN_2,  GPIOE, GPIO_PIN_3,  TIM_CHANNEL_2 },
+    /* M_BL (M3) */ { GPIOD, GPIO_PIN_2,  GPIOD, GPIO_PIN_3,  TIM_CHANNEL_3 },
+    /* M_BR (M4) */ { GPIOD, GPIO_PIN_7,  GPIOD, GPIO_PIN_4,  TIM_CHANNEL_4 },
 };
 
 static inline int16_t clamp(int32_t v, int32_t lo, int32_t hi) {
@@ -25,6 +25,7 @@ static inline int32_t iabs(int32_t v) { return v < 0 ? -v : v; }
 
 void Mecanum_Init(void)
 {
+    
     HAL_TIM_PWM_Start(&htim3, TIM_CHANNEL_1);
     HAL_TIM_PWM_Start(&htim3, TIM_CHANNEL_2);
     HAL_TIM_PWM_Start(&htim3, TIM_CHANNEL_3);

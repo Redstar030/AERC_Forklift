@@ -48,6 +48,7 @@ TIM_HandleTypeDef htim12;
 
 UART_HandleTypeDef huart1;
 UART_HandleTypeDef huart2;
+
 /* USER CODE BEGIN PV */
 
 /* USER CODE END PV */
@@ -109,6 +110,7 @@ int main(void)
   MX_TIM12_Init();
   /* USER CODE BEGIN 2 */
   Mecanum_Init();
+  HAL_Delay(500);
   /* USER CODE END 2 */
 
   /* Infinite loop */
@@ -121,7 +123,6 @@ int main(void)
   {
     /* USER CODE END WHILE */
 
-    
     /* USER CODE BEGIN 3 */
   }
   /* USER CODE END 3 */
@@ -542,7 +543,7 @@ static void MX_GPIO_Init(void)
                           |M3_AIN1_Pin|M3_AIN2_Pin|M3_BIN1_Pin|M3_BIN2_Pin, GPIO_PIN_RESET);
 
   /*Configure GPIO pin Output Level */
-  HAL_GPIO_WritePin(STBY_ALL_GPIO_Port, STBY_ALL_Pin, GPIO_PIN_RESET);
+  HAL_GPIO_WritePin(STBY_ALL_GPIO_Port, STBY_ALL_Pin, GPIO_PIN_SET);
 
   /*Configure GPIO pins : M2_BIN1_Pin M2_BIN2_Pin LED3_Pin LED4_Pin
                            LED1_Pin M6_PWMA_Pin M6_PWMB_Pin */
