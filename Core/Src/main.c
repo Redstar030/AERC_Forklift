@@ -52,7 +52,7 @@ UART_HandleTypeDef huart2;
 
 /* USER CODE BEGIN PV */
 extern volatile int32_t enc_ticks[4];
-extern int test;
+int test;
 /* USER CODE END PV */
 
 /* Private function prototypes -----------------------------------------------*/
@@ -66,6 +66,16 @@ static void MX_TIM2_Init(void);
 static void MX_TIM8_Init(void);
 static void MX_TIM12_Init(void);
 /* USER CODE BEGIN PFP */
+void HAL_TIM_IC_CaptureCallback(TIM_HandleTypeDef *htim)
+{
+    test ++;
+    if (htim->Channel != HAL_TIM_ACTIVE_CHANNEL_1) return;
+
+    if      (htim == &htim2)  enc_ticks[0]++;
+    else if (htim == &htim8)  enc_ticks[1]++;
+    else if (htim == &htim1)  enc_ticks[2]++;
+    else if (htim == &htim12) enc_ticks[3]++;
+}
 /* USER CODE END PFP */
 
 /* Private user code ---------------------------------------------------------*/
