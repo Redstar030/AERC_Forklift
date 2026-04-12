@@ -18,6 +18,7 @@ void Motor_Set(MotorId id, int16_t speed);
 void Mecanum_Drive(int16_t vx, int16_t vy, int16_t wz);
  
 void Mecanum_Stop(void);
- 
+
+void Mecanum_test(void);
 #endif
  

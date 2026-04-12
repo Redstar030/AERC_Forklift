@@ -22,6 +22,7 @@
 /* Private includes ----------------------------------------------------------*/
 /* USER CODE BEGIN Includes */
 #include "mecanum.h"
+#include "encoder.h"
 /* USER CODE END Includes */
 
 /* Private typedef -----------------------------------------------------------*/
@@ -50,7 +51,8 @@ UART_HandleTypeDef huart1;
 UART_HandleTypeDef huart2;
 
 /* USER CODE BEGIN PV */
-
+extern volatile int32_t enc_ticks[4];
+extern int test;
 /* USER CODE END PV */
 
 /* Private function prototypes -----------------------------------------------*/
@@ -64,7 +66,6 @@ static void MX_TIM2_Init(void);
 static void MX_TIM8_Init(void);
 static void MX_TIM12_Init(void);
 /* USER CODE BEGIN PFP */
-
 /* USER CODE END PFP */
 
 /* Private user code ---------------------------------------------------------*/
@@ -110,15 +111,11 @@ int main(void)
   MX_TIM12_Init();
   /* USER CODE BEGIN 2 */
   Mecanum_Init();
-  HAL_Delay(500);
+  Encoder_Init();  
   /* USER CODE END 2 */
 
   /* Infinite loop */
   /* USER CODE BEGIN WHILE */
-  Motor_Set(M_FL, 400); HAL_Delay(1000);  Motor_Set(M_FL, 0);
-  Motor_Set(M_FR, 400); HAL_Delay(1000);  Motor_Set(M_FR, 0);
-  Motor_Set(M_BL, 400); HAL_Delay(1000);  Motor_Set(M_BL, 0);
-  Motor_Set(M_BR, 400); HAL_Delay(1000);  Motor_Set(M_BR, 0);
   while (1)
   {
     /* USER CODE END WHILE */

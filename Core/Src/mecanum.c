@@ -76,3 +76,20 @@ void Mecanum_Stop(void)
 {
     for (int i = 0; i < 4; i++) Motor_Set((MotorId)i, 0);
 }
+
+void Mecanum_test(void)
+{
+    Mecanum_Init();
+    HAL_Delay(1000);
+    
+    // right
+    Mecanum_Drive(0, 400, 0);  
+    HAL_Delay(2000);
+    Mecanum_Stop();             
+    HAL_Delay(1000);
+
+    // 
+    Mecanum_Drive(0, 0, 400);  HAL_Delay(2000);
+    Mecanum_Stop();
+    
+}
