@@ -1,4 +1,5 @@
 #include "mecanum.h"
+#include "stm32f4xx_hal_gpio.h"
 
 extern TIM_HandleTypeDef htim3;
 
@@ -12,10 +13,11 @@ typedef struct {
 } MotorCfg;
 
 static MotorCfg motors[4] = {
-    /* M_FL (M1) */ { GPIOB, GPIO_PIN_13, GPIOB, GPIO_PIN_12, TIM_CHANNEL_1 },
-    /* M_FR (M2) */ { GPIOE, GPIO_PIN_2,  GPIOE, GPIO_PIN_3,  TIM_CHANNEL_2 },
+    /* M_FL (M1) */ { GPIOB, GPIO_PIN_12, GPIOB, GPIO_PIN_13, TIM_CHANNEL_1 },
+    /* M_FR (M2) */ { GPIOE, GPIO_PIN_3,  GPIOE, GPIO_PIN_2,  TIM_CHANNEL_2 },
     /* M_BL (M3) */ { GPIOD, GPIO_PIN_2,  GPIOD, GPIO_PIN_3,  TIM_CHANNEL_3 },
     /* M_BR (M4) */ { GPIOD, GPIO_PIN_7,  GPIOD, GPIO_PIN_4,  TIM_CHANNEL_4 },
+ 
 };
 
 static inline int16_t clamp(int32_t v, int32_t lo, int32_t hi) {
@@ -92,4 +94,18 @@ void Mecanum_test(void)
     Mecanum_Drive(0, 0, 400);  HAL_Delay(2000);
     Mecanum_Stop();
     
+    Motor_Set(4,-500);
 }
+
+/*HAL_Delay(1000);
+
+Mecanum_Drive(400, 0, 0);   HAL_Delay(1500);  // 前進
+Mecanum_Stop();              HAL_Delay(500);
+Mecanum_Drive(-400, 0, 0);  HAL_Delay(1500);  // 後退
+Mecanum_Stop();              HAL_Delay(500);
+Mecanum_Drive(0, 400, 0);   HAL_Delay(1500);  // 右平移
+Mecanum_Stop();              HAL_Delay(500);
+Mecanum_Drive(0, -400, 0);  HAL_Delay(1500);  // 左平移
+Mecanum_Stop();              HAL_Delay(500);
+Mecanum_Drive(0, 0, 400);   HAL_Delay(1500);  // 原地右轉
+Mecanum_Stop();*/
