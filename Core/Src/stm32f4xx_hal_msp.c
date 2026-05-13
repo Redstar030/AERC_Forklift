@@ -99,14 +99,13 @@ void HAL_TIM_Base_MspInit(TIM_HandleTypeDef* htim_base)
     __HAL_RCC_GPIOE_CLK_ENABLE();
     /**TIM1 GPIO Configuration
     PE9     ------> TIM1_CH1
-    PE11     ------> TIM1_CH2
     */
-    GPIO_InitStruct.Pin = ENC2A_Pin|ENC2B_Pin;
+    GPIO_InitStruct.Pin = ENC2A_Pin;
     GPIO_InitStruct.Mode = GPIO_MODE_AF_PP;
     GPIO_InitStruct.Pull = GPIO_PULLUP;
     GPIO_InitStruct.Speed = GPIO_SPEED_FREQ_LOW;
     GPIO_InitStruct.Alternate = GPIO_AF1_TIM1;
-    HAL_GPIO_Init(GPIOE, &GPIO_InitStruct);
+    HAL_GPIO_Init(ENC2A_GPIO_Port, &GPIO_InitStruct);
 
     /* TIM1 interrupt Init */
     HAL_NVIC_SetPriority(TIM1_CC_IRQn, 0, 0);
@@ -329,9 +328,8 @@ void HAL_TIM_Base_MspDeInit(TIM_HandleTypeDef* htim_base)
 
     /**TIM1 GPIO Configuration
     PE9     ------> TIM1_CH1
-    PE11     ------> TIM1_CH2
     */
-    HAL_GPIO_DeInit(GPIOE, ENC2A_Pin|ENC2B_Pin);
+    HAL_GPIO_DeInit(ENC2A_GPIO_Port, ENC2A_Pin);
 
     /* TIM1 interrupt DeInit */
     HAL_NVIC_DisableIRQ(TIM1_CC_IRQn);

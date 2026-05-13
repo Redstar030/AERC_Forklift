@@ -22,8 +22,8 @@
 /* Private includes ----------------------------------------------------------*/
 /* USER CODE BEGIN Includes */
 #include "mecanum.h"
+#include "ps4.h"
 #include "controller.h"
-#include "receiver.h"
 #include "stm32f4xx_hal.h"
 #include "stm32f4xx_hal_gpio.h"
 #include "fork.h"
@@ -58,7 +58,6 @@ UART_HandleTypeDef huart2;
 /* USER CODE BEGIN PV */
 extern volatile int32_t enc_ticks[4];
 extern volatile int test;
-extern Receiver *rx_all[5]; 
 /* USER CODE END PV */
 
 /* Private function prototypes -----------------------------------------------*/
@@ -77,6 +76,7 @@ static void MX_TIM5_Init(void);
 /* USER CODE END PFP */
 
 /* Private user code ---------------------------------------------------------*/
+
 /* USER CODE BEGIN 0 */
 
 /* USER CODE END 0 */
@@ -129,7 +129,7 @@ int main(void)
   while (1)
   {
     Controller_Update();
-    HAL_Delay(20);  
+    HAL_Delay(10);
     /* USER CODE END WHILE */
 
     /* USER CODE BEGIN 3 */
@@ -379,9 +379,9 @@ static void MX_TIM5_Init(void)
 
   /* USER CODE END TIM5_Init 1 */
   htim5.Instance = TIM5;
-  htim5.Init.Prescaler = 0;
+  htim5.Init.Prescaler = 15;
   htim5.Init.CounterMode = TIM_COUNTERMODE_UP;
-  htim5.Init.Period = 4294967295;
+  htim5.Init.Period = 65535;
   htim5.Init.ClockDivision = TIM_CLOCKDIVISION_DIV1;
   htim5.Init.AutoReloadPreload = TIM_AUTORELOAD_PRELOAD_DISABLE;
   if (HAL_TIM_IC_Init(&htim5) != HAL_OK)
@@ -598,7 +598,7 @@ static void MX_GPIO_Init(void)
 
   /*Configure GPIO pin Output Level */
   HAL_GPIO_WritePin(GPIOE, M2_BIN1_Pin|M2_BIN2_Pin|LED3_Pin|LED4_Pin
-                          |LED1_Pin|M6_PWMA_Pin|M6_PWMB_Pin, GPIO_PIN_RESET);
+                          |LED1_Pin|fork1_Pin|fork2_Pin, GPIO_PIN_RESET);
 
   /*Configure GPIO pin Output Level */
   HAL_GPIO_WritePin(GPIOB, M2_AIN1_Pin|M2_AIN2_Pin, GPIO_PIN_RESET);
@@ -611,9 +611,9 @@ static void MX_GPIO_Init(void)
   HAL_GPIO_WritePin(STBY_ALL_GPIO_Port, STBY_ALL_Pin, GPIO_PIN_SET);
 
   /*Configure GPIO pins : M2_BIN1_Pin M2_BIN2_Pin LED3_Pin LED4_Pin
-                           LED1_Pin M6_PWMA_Pin M6_PWMB_Pin */
+                           LED1_Pin fork1_Pin fork2_Pin */
   GPIO_InitStruct.Pin = M2_BIN1_Pin|M2_BIN2_Pin|LED3_Pin|LED4_Pin
-                          |LED1_Pin|M6_PWMA_Pin|M6_PWMB_Pin;
+                          |LED1_Pin|fork1_Pin|fork2_Pin;
   GPIO_InitStruct.Mode = GPIO_MODE_OUTPUT_PP;
   GPIO_InitStruct.Pull = GPIO_NOPULL;
   GPIO_InitStruct.Speed = GPIO_SPEED_FREQ_LOW;

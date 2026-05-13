@@ -3,8 +3,11 @@
 #include "main.h"
 
 void Fork_Init(void);
-void Fork_Up(void);      
-void Fork_Down(void);    
-void Fork_Stop(void);
+void Fork1_Up(void);      
+void Fork1_Down(void);    
+void Fork1_Stop(void);
 
+void Fork2_Up(void);      
+void Fork2_Down(void);    
+void Fork2_Stop(void);
 #endif

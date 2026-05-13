@@ -47,8 +47,8 @@ target_sources(${CMAKE_PROJECT_NAME} PRIVATE
     # Add user sources here
     "./core/Src/mecanum.c"
     "./core/Src/fork.c"
+    "./core/Src/ps4.c"
     "./core/Src/controller.c"
-    "./core/Src/receiver.c"
 )
 
 # Add include paths
